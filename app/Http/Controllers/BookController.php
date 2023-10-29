@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $title = $request->input('title');
+        $books = Book::when($title, function ($query, $title) {
+            $query->title($title);
+        })->popular()->highestRated()->get();
+        //return $books;
+        return view('books.index', compact('books'));
     }
 
 
@@ -27,7 +33,8 @@ class BookController extends Controller
 
     public function show(string $id)
     {
-        //
+        $book = Book::findOrFail($id);
+        return view('books.show', compact('book'));
     }
 
 
