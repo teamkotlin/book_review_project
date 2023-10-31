@@ -4,6 +4,7 @@
     <form method="GET" action="{{ route('books.index') }}" class="mb-4 flex items-center space-x-2">
         <input type="text" name="title" placeholder="Search By Title" value="{{ request('title') }}" class="input h-10">
         <button type="submit" class="btn h-10">Search</button>
+        <input type="hidden" name="filter" value="{{ request('filter') }}" />
         <a href="{{ route('books.index') }}">Clear</a>
     </form>
     <div class="filter-container mb-4 flex">
@@ -17,7 +18,7 @@
             ];
         @endphp
         @foreach ($filters as $key => $value)
-            <a href="{{ route('books.index', ['filter' => $key]) }}"
+            <a href="{{ route('books.index', [...request()->query(), 'filter' => $key]) }}"
                 class="{{ request('filter') == $key ? 'filter-item-active' : 'filter-item' }}">{{ $value }}</a>
         @endforeach
     </div>
@@ -32,7 +33,8 @@
                         </div>
                         <div>
                             <div class="book-rating">
-                                {{ number_format($book->reviews_avg_rating, 1) }}
+                                <x-start-rating :rating="number_format($book->reviews_avg_rating, 1)" />
+
                             </div>
                             <div class="book-review-count">
                                 out of {{ $book->reviews_count }} {{ Str::plural('reviews', $book->reviews_count) }}

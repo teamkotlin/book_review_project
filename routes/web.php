@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return redirect()->route('books.index');
     //$book = Book::with('reviews_count')->find(102);
     //return $book;
     //$reviews_count = Book::withCount('reviews')->withAvg('reviews', 'rating')->latest()->having('reviews_count', '>', 10)->orderBy('reviews_count', 'desc')->get();
