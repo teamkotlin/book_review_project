@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookController;
 use App\Models\Book;
 use App\Models\Review;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +16,16 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::post('/', function (Request $request) {
+    $data = $request->validate([
+        'name' => 'required',
+        'email' => 'required',
+        'password' => 'required'
+    ]);
+    return view('tasks')->with('success', 'Data is Fetched Successfully.');
+})->name('data');
 Route::get('/', function () {
+    return view('tasks');
     return redirect()->route('books.index');
     //$book = Book::with('reviews_count')->find(102);
     //return $book;
