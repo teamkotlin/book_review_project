@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Requests\TaskRequest;
 use App\Models\Book;
 use App\Models\Review;
+use Illuminate\Console\View\Components\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,12 +18,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::post('/', function (Request $request) {
-    $data = $request->validate([
-        'name' => 'required',
-        'email' => 'required',
-        'password' => 'required'
-    ]);
+Route::post('/', function (TaskRequest $request) {
+    //Task::create($request->validated());
     return view('tasks')->with('success', 'Data is Fetched Successfully.');
 })->name('data');
 Route::get('/', function () {
