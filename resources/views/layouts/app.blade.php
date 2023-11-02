@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>Book Reviews</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
 
     {{-- blade-formatter-disable --}}
   <style type="text/tailwindcss">
